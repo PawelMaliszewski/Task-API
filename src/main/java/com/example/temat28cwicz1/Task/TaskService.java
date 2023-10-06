@@ -2,7 +2,6 @@ package com.example.temat28cwicz1.Task;
 
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,5 +41,17 @@ public class TaskService {
             return Optional.of(taskDto);
         }
         return Optional.empty();
+    }
+
+    void updateTask(TaskDto taskDto) {
+        taskRepository.save(taskDtoMapper.convertToTask(taskDto));
+    }
+
+    boolean deleteTask(Long id) {
+        if (taskRepository.existsById(id)) {
+            taskRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
